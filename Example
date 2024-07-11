@@ -1,0 +1,7 @@
+local List = loadstring(game:HttpGet("https://github.com/l0ckerV5/List/raw/main/Source"))()
+
+List:createButton("Button0", 0, function() print("pressed") end)
+List:createButton("Button1", 1, function() print("pressed") end)
+List:createButton("Button2", 2, function() print("pressed") end)
+List:createButton("Button3", 3, function() print("pressed") end)
+List:createButton("Button4", 4, function() print("pressed") end)
