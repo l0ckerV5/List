@@ -1,0 +1,41 @@
+local function createGui(player)
+    local screenGui = Instance.new("ScreenGui")
+    screenGui.Name = "ComboGui"
+    screenGui.Parent = player:WaitForChild("PlayerGui")
+ 
+    local toggleButton = Instance.new("TextButton")
+    toggleButton.Size = UDim2.new(0, 50, 0, 50)
+    toggleButton.Position = UDim2.new(0, 0, 0.5, -25)
+    toggleButton.Text = "<"
+    toggleButton.Parent = screenGui
+ 
+    local buttonFrame = Instance.new("Frame")
+    buttonFrame.Size = UDim2.new(0, 150, 0, 150)
+    buttonFrame.Position = UDim2.new(0, 50, 0.5, -75)
+    buttonFrame.Visible = false
+    buttonFrame.Parent = screenGui
+ 
+    local function createButton(name, position, callback)
+        local button = Instance.new("TextButton")
+        button.Size = UDim2.new(1, 0, 0, 50)
+        button.Position = UDim2.new(0, 0, 0, position * 50)
+        button.Text = name
+        button.MouseButton1Click:Connect(callback)
+        button.Parent = buttonFrame
+    end
+ 
+    toggleButton.MouseButton1Click:Connect(function()
+        buttonFrame.Visible = not buttonFrame.Visible
+        toggleButton.Text = buttonFrame.Visible and ">" or "<"
+    end)
+end
+ 
+local Players = game:GetService("Players")
+ 
+Players.PlayerAdded:Connect(function(player)
+    player.CharacterAdded:Connect(function()
+        createGui(player)
+    end)
+end)
+ 
+createGui(game.Players.LocalPlayer)
